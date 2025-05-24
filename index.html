@@ -1,96 +1,1404 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Rights Defender">
+    <meta name="theme-color" content="#1f2937">
+    <title>Rights Defender - Traffic Stop Assistant</title>
+    <style>
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box;
+            -webkit-touch-callout: none; 
+            -webkit-user-select: none; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+        body { 
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #000;
+            color: white;
+            min-height: 100vh;
+            overscroll-behavior: none;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .shield {
+            width: 32px;
+            height: 32px;
+            background: #3b82f6;
+            border-radius: 4px;
+            position: relative;
+        }
+        .shield::before {
+            content: '🛡️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .subtitle {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 20px;
+        }
+        .main-card {
+            background: #1f2937;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .emergency-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+        }
+        .emergency-btn {
+            width: 80px;
+            padding: 16px 8px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .emergency-btn:active {
+            transform: scale(0.95);
+        }
+        .record-btn {
+            background: #16a34a;
+        }
+        .record-btn.active {
+            background: #22c55e;
+            animation: pulse 2s infinite;
+        }
+        .transmit-btn {
+            background: #ca8a04;
+        }
+        .transmit-btn.active {
+            background: #eab308;
+            animation: pulse 2s infinite;
+        }
+        .emergency-911 {
+            background: #dc2626;
+        }
+        .emergency-911:hover {
+            background: #ef4444;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #4b5563;
+            border-radius: 8px;
+            background: #374151;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        select:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        .selected-state {
+            background: #064e3b;
+            border: 1px solid #10b981;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 16px 0;
+            color: #6ee7b7;
+            font-size: 14px;
+        }
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .btn-primary {
+            background: #2563eb;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        .btn-success {
+            background: #16a34a;
+        }
+        .btn-success:hover {
+            background: #15803d;
+        }
+        .btn-danger {
+            background: #dc2626;
+        }
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+        .status-bar {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #374151;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .overlay-content {
+            background: white;
+            color: black;
+            padding: 32px;
+            border-radius: 12px;
+            text-align: center;
+            border: 4px solid #dc2626;
+            max-width: 300px;
+        }
+        .countdown {
+            font-size: 48px;
+            font-weight: bold;
+            color: #dc2626;
+            margin-bottom: 16px;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 6px;
+            margin: 16px auto;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #dc2626;
+            transition: width 1s linear;
+        }
+        .hidden {
+            display: none;
+        }
+        .app-badge {
+            background: #16a34a;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 12px;
+            margin-left: 8px;
+        }
+        .safety-box {
+            background: #1e3a8a;
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        .safety-box h3 {
+            color: #93c5fd;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .safety-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .safety-box li {
+            color: #bfdbfe;
+            font-size: 14px;
+            margin-bottom: 4px;
+            padding-left: 16px;
+            position: relative;
+        }
+        .safety-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #60a5fa;
+        }
+        .command-option {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #374151;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            border: 1px solid #4b5563;
+            margin-bottom: 8px;
+        }
+        .command-option:hover {
+            background: #475569;
+        }
+        .alert-section {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .alert-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        .alert-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f87171;
+            margin-bottom: 8px;
+        }
+        .alert-subtitle {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+        .response-box {
+            background: #374151;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        .response-script {
+            background: #4b5563;
+            padding: 12px;
+            border-radius: 6px;
+            font-style: italic;
+            color: #d1d5db;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Emergency Buttons -->
+    <div class="emergency-buttons">
+        <button class="emergency-btn record-btn" id="recordBtn">
+            <div>INTERACTION</div>
+            <div>RECORDING</div>
+            <div style="opacity: 0.7; margin-top: 4px;">Auto</div>
+        </button>
+        <button class="emergency-btn transmit-btn" id="transmitBtn">
+            <div>LIVE</div>
+            <div>TRANSMISSION</div>
+        </button>
+        <button class="emergency-btn emergency-911" id="emergencyBtn">
+            <div>EMERGENCY</div>
+            <div>911</div>
+        </button>
+    </div>
+
+    <!-- Emergency Countdown Overlay -->
+    <div class="overlay hidden" id="emergencyOverlay">
+        <div class="overlay-content">
+            <div class="countdown" id="countdown">3</div>
+            <div>Hold to call 911</div>
+            <div style="color: #666; margin-top: 8px;">Release to cancel</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Active Overlay -->
+    <div class="overlay hidden" id="emergencyActiveOverlay" style="background: rgba(220,38,38,0.8); animation: pulse 2s infinite;">
+        <div class="overlay-content">
+            <div style="font-size: 32px; font-weight: bold; color: #dc2626; margin-bottom: 16px;">🚨 CALLING 911 🚨</div>
+            <div>Emergency services contacted</div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="shield"></div>
+                <h1>Rights Defender</h1>
+                <div class="app-badge hidden" id="appBadge">App</div>
+            </div>
+            <div class="subtitle">
+                Respectful Education • Evidence Documentation • Legal Protection
+            </div>
+        </div>
+
+        <div class="main-card">
+            <div id="mainContent">
+                <h2 style="text-align: center; margin-bottom: 10px;">Select Your State</h2>
+                <p style="text-align: center; color: #9ca3af; font-size: 14px; margin-bottom: 20px;">Laws vary by state - accurate guidance requires your location</p>
+                
+                <select id="stateSelect">
+                    <option value="" disabled selected>Choose your state...</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                    <option value="DC">District of Columbia</option>
+                </select>
+
+                <div class="selected-state hidden" id="selectedState">
+                    ✓ Selected: <span id="stateName"></span>
+                </div>
+
+                <button class="btn btn-primary hidden" id="startBtn">
+                    🚔 POLICE ENCOUNTER STARTING NOW
+                </button>
+            </div>
+
+            <div class="status-bar" id="statusBar">
+                <span>📍 Ready to start</span>
+                <span>⚖️ Legal protection active</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // App state
+        let isRecording = false;
+        let isTransmitting = false;
+        let selectedState = '';
+        let interactions = 0;
+        let currentStep = 'state-selection';
+        let encounterStartTime = null;
+        let currentTime = new Date();
+        let stopReasons = [];
+        let timeline = [];
+        let threatLevel = 'normal';
+
+        // Stop reason categories with time limits
+        const stopReasonCategories = {
+            'traffic_citation': {
+                name: 'Traffic Citation',
+                suggestedTime: 20,
+                legalBasis: 'Rodriguez v. US - Traffic stops limited to time reasonably required'
+            },
+            'equipment_violation': {
+                name: 'Equipment Violation', 
+                suggestedTime: 15,
+                legalBasis: 'Simple equipment violations require minimal time'
+            },
+            'multiple_violations': {
+                name: 'Multiple Violations',
+                suggestedTime: 25,
+                legalBasis: 'Multiple citations extend reasonable time proportionally'
+            },
+            'dui_investigation': {
+                name: 'DUI Investigation',
+                suggestedTime: 45,
+                legalBasis: 'DUI investigations allow extended time for safety testing'
+            },
+            'complex_stop': {
+                name: 'Complex Stop',
+                suggestedTime: null,
+                legalBasis: 'Complex stops require case-by-case analysis'
+            }
+        };
+
+        // Threat detection keywords
+        const threatKeywords = {
+            high: ['break', 'drag', 'force you', 'hurt', 'beat', 'slam', 'smash', 'destroy', 'violence', 'regret', 'mess with you', 'teach you', 'make you pay'],
+            medium: ['don\'t test me', 'comply or else', 'hard way', 'difficult', 'arrest you for recording', 'stop recording or', 'make this hard'],
+            low: ['unprofessional', 'attitude', 'smartass', 'wise guy', 'shut up', 'whatever']
+        };
+
+        // Calculate weighted time for multiple violations
+        function calculateWeightedTime(selectedReasons) {
+            console.log('Calculating weighted time for:', selectedReasons);
+            
+            const suggestedTimes = selectedReasons
+                .map(reason => stopReasonCategories[reason]?.suggestedTime)
+                .filter(time => time !== null && time !== undefined);
+            
+            console.log('Suggested times:', suggestedTimes);
+            
+            if (suggestedTimes.length === 0) return null;
+            if (suggestedTimes.length === 1) return suggestedTimes[0];
+            
+            const primaryTime = Math.max(...suggestedTimes);
+            const additionalTime = suggestedTimes
+                .filter(time => time !== primaryTime)
+                .reduce((sum, time) => sum + (time * 0.75), 0);
+            
+            const total = Math.round(primaryTime + additionalTime);
+            console.log('Weighted time calculation:', { primaryTime, additionalTime, total });
+            return total;
+        }
+
+        // Get timer information
+        function getTimerInfo() {
+            if (!encounterStartTime) return null;
+            
+            const elapsedMs = currentTime - encounterStartTime;
+            const elapsedMinutes = Math.floor(elapsedMs / 60000);
+            const elapsedSeconds = Math.floor((elapsedMs % 60000) / 1000);
+            
+            const suggestedTime = calculateWeightedTime(stopReasons);
+            
+            let status = 'monitoring';
+            let color = 'gray';
+            
+            if (suggestedTime) {
+                const timeUsedPercent = elapsedMinutes / suggestedTime;
+                if (timeUsedPercent < 0.7) {
+                    status = 'reasonable';
+                    color = 'green';
+                } else if (timeUsedPercent < 0.9) {
+                    status = 'caution';
+                    color = 'yellow';
+                } else {
+                    status = 'concern';
+                    color = 'red';
+                }
+            }
+            
+            return {
+                elapsedMinutes,
+                elapsedSeconds,
+                suggestedTime,
+                status,
+                color,
+                timeUsedPercent: suggestedTime ? (elapsedMinutes / suggestedTime) : 0
+            };
+        }
+
+        // Detect threat level
+        function detectThreatLevel(command) {
+            const lowerCommand = command.toLowerCase();
+            
+            if (threatKeywords.high.some(keyword => lowerCommand.includes(keyword))) {
+                return 'dangerous';
+            }
+            
+            if (threatKeywords.medium.some(keyword => lowerCommand.includes(keyword))) {
+                return 'threatening';
+            }
+            
+            if (threatKeywords.low.some(keyword => lowerCommand.includes(keyword))) {
+                return 'unprofessional';
+            }
+            
+            return 'normal';
+        }
+
+        // Add timeline entry
+        function addTimelineEntry(command, assessment, lawfulStatus, courtChallenge = null) {
+            const entry = {
+                timestamp: new Date().toLocaleTimeString(),
+                command,
+                assessment,
+                lawfulStatus,
+                courtChallenge,
+                id: Date.now()
+            };
+            timeline.push(entry);
+        }
+
+        // Update current time every second
+        setInterval(() => {
+            currentTime = new Date();
+            updateTimerDisplay();
+        }, 1000);
+
+        const stateNames = {
+            'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas',
+            'CA': 'California', 'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware',
+            'FL': 'Florida', 'GA': 'Georgia', 'HI': 'Hawaii', 'ID': 'Idaho',
+            'IL': 'Illinois', 'IN': 'Indiana', 'IA': 'Iowa', 'KS': 'Kansas',
+            'KY': 'Kentucky', 'LA': 'Louisiana', 'ME': 'Maine', 'MD': 'Maryland',
+            'MA': 'Massachusetts', 'MI': 'Michigan', 'MN': 'Minnesota', 'MS': 'Mississippi',
+            'MO': 'Missouri', 'MT': 'Montana', 'NE': 'Nebraska', 'NV': 'Nevada',
+            'NH': 'New Hampshire', 'NJ': 'New Jersey', 'NM': 'New Mexico', 'NY': 'New York',
+            'NC': 'North Carolina', 'ND': 'North Dakota', 'OH': 'Ohio', 'OK': 'Oklahoma',
+            'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
+            'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah',
+            'VT': 'Vermont', 'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia',
+            'WI': 'Wisconsin', 'WY': 'Wyoming', 'DC': 'District of Columbia'
+        };
+
+        // Emergency countdown
+        let emergencyTimer = null;
+
+        function startEmergencyCountdown() {
+            let countdown = 3;
+            document.getElementById('emergencyOverlay').classList.remove('hidden');
+            document.getElementById('countdown').textContent = countdown;
+            document.getElementById('progressFill').style.width = '0%';
+
+            emergencyTimer = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    document.getElementById('countdown').textContent = countdown;
+                    document.getElementById('progressFill').style.width = ((3 - countdown) / 3 * 100) + '%';
+                } else {
+                    clearInterval(emergencyTimer);
+                    call911();
+                }
+            }, 1000);
+        }
+
+        function cancelEmergencyCountdown() {
+            if (emergencyTimer) {
+                clearInterval(emergencyTimer);
+                emergencyTimer = null;
+                document.getElementById('emergencyOverlay').classList.add('hidden');
+            }
+        }
+
+        function call911() {
+            document.getElementById('emergencyOverlay').classList.add('hidden');
+            document.getElementById('emergencyActiveOverlay').classList.remove('hidden');
+            
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                setTimeout(() => {
+                    window.open('tel:911', '_self');
+                }, 2000);
+            } else {
+                setTimeout(() => {
+                    alert('🚨 CALLING 911\n📞 Emergency services contacted');
+                    document.getElementById('emergencyActiveOverlay').classList.add('hidden');
+                }, 3000);
+            }
+            interactions++;
+            updateStatus();
+        }
+
+        // Emergency button event listeners
+        document.getElementById('emergencyBtn').addEventListener('mousedown', startEmergencyCountdown);
+        document.getElementById('emergencyBtn').addEventListener('mouseup', cancelEmergencyCountdown);
+        document.getElementById('emergencyBtn').addEventListener('mouseleave', cancelEmergencyCountdown);
+        document.getElementById('emergencyBtn').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            startEmergencyCountdown();
+        });
+        document.getElementById('emergencyBtn').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            cancelEmergencyCountdown();
+        });
+
+        // Recording button
+        document.getElementById('recordBtn').addEventListener('click', () => {
+            isRecording = !isRecording;
+            const btn = document.getElementById('recordBtn');
+            if (isRecording) {
+                btn.classList.add('active');
+                interactions++;
+            } else {
+                btn.classList.remove('active');
+            }
+            updateStatus();
+        });
+
+        // Transmission button
+        document.getElementById('transmitBtn').addEventListener('click', () => {
+            isTransmitting = !isTransmitting;
+            const btn = document.getElementById('transmitBtn');
+            if (isTransmitting) {
+                btn.classList.add('active');
+                interactions++;
+            } else {
+                btn.classList.remove('active');
+            }
+            updateStatus();
+        });
+
+        // State selection
+        document.getElementById('stateSelect').addEventListener('change', (e) => {
+            selectedState = e.target.value;
+            if (selectedState) {
+                document.getElementById('selectedState').classList.remove('hidden');
+                document.getElementById('startBtn').classList.remove('hidden');
+                document.getElementById('stateName').textContent = stateNames[selectedState];
+                updateStatus();
+            }
+        });
+
+        // Start encounter
+        document.getElementById('startBtn').addEventListener('click', () => {
+            showTrafficStopScreen();
+        });
+
+        function showTrafficStopScreen() {
+            isRecording = true;
+            document.getElementById('recordBtn').classList.add('active');
+            interactions++;
+            currentStep = 'traffic-stop';
+            encounterStartTime = new Date();
+            addTimelineEntry('POLICE ENCOUNTER INITIATED', 'Auto-recording started', 'recording');
+
+            const content = `
+                <div class="alert-section">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">TRAFFIC STOP ACTIVE</div>
+                    <div class="alert-subtitle">Stay calm. Evidence recording started.</div>
+                </div>
+
+                <!-- Timer Display -->
+                <div id="timerDisplay" style="background: #374151; border: 2px solid #4b5563; padding: 12px; border-radius: 8px; margin: 16px 0;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 16px;">⏱️</span>
+                            <span style="font-weight: bold; color: white; font-size: 14px;">Detention Timer</span>
+                        </div>
+                        <div id="timeDisplay" style="font-size: 18px; font-weight: bold; color: #9ca3af;">
+                            00:00
+                        </div>
+                    </div>
+                    <div id="timeProgress" style="width: 100%; background: #4b5563; border-radius: 4px; height: 6px; margin-bottom: 8px;">
+                        <div id="timeProgressFill" style="height: 100%; background: #6b7280; border-radius: 4px; width: 0%; transition: all 0.5s;"></div>
+                    </div>
+                    <div id="timeStatus" style="font-size: 12px; color: #9ca3af;">
+                        👁️ Time monitoring active - Select stop reasons below for legal time limits
+                    </div>
+                    <div style="font-size: 10px; color: #6b7280; margin-top: 4px; font-style: italic;">
+                        *Based on Rodriguez v. US and traffic stop case law
+                    </div>
+                </div>
+
+                <div class="safety-box">
+                    <h3>🛡️ IMMEDIATE SAFETY ACTIONS:</h3>
+                    <ul>
+                        <li>Turn off engine, remove keys</li>
+                        <li>Place hands on steering wheel</li>
+                        <li>Turn on interior lights if dark</li>
+                        <li>Wait for officer approach</li>
+                        <li>Remain calm and respectful</li>
+                    </ul>
+                </div>
+
+                <!-- Stop Reasons -->
+                <div style="background: #374151; border: 1px solid #4b5563; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                    <h3 style="font-weight: bold; color: white; margin-bottom: 12px;">📋 What is the stop for?</h3>
+                    <p style="color: #9ca3af; font-size: 12px; margin-bottom: 12px;">Select all that apply - this helps set detention time expectations</p>
+                    <div id="stopReasonCheckboxes">
+                        ${Object.entries(stopReasonCategories).map(([key, reason]) => `
+                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+                                <input type="checkbox" onchange="updateStopReasons('${key}', this.checked)" style="margin: 0;">
+                                <div>
+                                    <div style="color: white; font-size: 14px;">${reason.name}</div>
+                                    <div style="color: #9ca3af; font-size: 12px;">
+                                        ${reason.suggestedTime ? `~${reason.suggestedTime} min suggested` : 'Variable time'}
+                                    </div>
+                                </div>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div id="reasonsSummary" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #4b5563; font-size: 12px; color: #60a5fa; display: none;">
+                        <strong>Weighted Total:</strong> <span id="totalTime">0</span> minutes
+                    </div>
+                </div>
+
+                <button class="btn btn-success" onclick="showOfficerCommandScreen()">
+                    👮 OFFICER IS SPEAKING
+                </button>
+                
+                <button class="btn btn-danger" onclick="showSummaryScreen()">
+                    🏁 END ENCOUNTER
+                </button>
+            `;
+
+            document.getElementById('mainContent').innerHTML = content;
+            updateStatus();
+            
+            // Initialize timer display
+            setTimeout(() => {
+                updateTimerDisplay();
+            }, 100);
+        }
+
+        function updateStopReasons(reasonKey, isChecked) {
+            if (isChecked) {
+                if (!stopReasons.includes(reasonKey)) {
+                    stopReasons.push(reasonKey);
+                }
+            } else {
+                stopReasons = stopReasons.filter(r => r !== reasonKey);
+            }
+
+            // Update summary
+            const totalTime = calculateWeightedTime(stopReasons);
+            const summaryDiv = document.getElementById('reasonsSummary');
+            const totalTimeSpan = document.getElementById('totalTime');
+            
+            if (stopReasons.length > 0 && totalTime) {
+                summaryDiv.style.display = 'block';
+                totalTimeSpan.textContent = totalTime;
+            } else {
+                summaryDiv.style.display = 'none';
+            }
+
+            // Update the timer display immediately
+            updateTimerDisplay();
+            console.log('Stop reasons updated:', stopReasons, 'Total time:', totalTime);
+        }
+
+        function updateTimerDisplay() {
+            const timerInfo = getTimerInfo();
+            if (!timerInfo) return;
+
+            const timeDisplay = document.getElementById('timeDisplay');
+            const timeProgressFill = document.getElementById('timeProgressFill');
+            const timeStatus = document.getElementById('timeStatus');
+
+            if (timeDisplay) {
+                timeDisplay.textContent = `${String(timerInfo.elapsedMinutes).padStart(2, '0')}:${String(timerInfo.elapsedSeconds).padStart(2, '0')}`;
+                
+                // Update color based on status
+                if (timerInfo.color === 'green') {
+                    timeDisplay.style.color = '#22c55e';
+                } else if (timerInfo.color === 'yellow') {
+                    timeDisplay.style.color = '#eab308';
+                } else if (timerInfo.color === 'red') {
+                    timeDisplay.style.color = '#ef4444';
+                } else {
+                    timeDisplay.style.color = '#9ca3af';
+                }
+            }
+
+            if (timeProgressFill && timerInfo.suggestedTime) {
+                const percentage = Math.min(100, timerInfo.timeUsedPercent * 100);
+                timeProgressFill.style.width = `${percentage}%`;
+                
+                if (timerInfo.color === 'green') {
+                    timeProgressFill.style.background = '#22c55e';
+                } else if (timerInfo.color === 'yellow') {
+                    timeProgressFill.style.background = '#eab308';
+                } else if (timerInfo.color === 'red') {
+                    timeProgressFill.style.background = '#ef4444';
+                }
+            } else if (timeProgressFill) {
+                // No suggested time, show basic progress in gray
+                timeProgressFill.style.width = '10%';
+                timeProgressFill.style.background = '#6b7280';
+            }
+
+            if (timeStatus) {
+                if (timerInfo.suggestedTime) {
+                    let statusText = '';
+                    if (timerInfo.status === 'reasonable') {
+                        statusText = `✓ Within reasonable time (${timerInfo.suggestedTime} min limit)`;
+                    } else if (timerInfo.status === 'caution') {
+                        statusText = `⚠️ Approaching time limit (${timerInfo.suggestedTime} min limit)`;
+                    } else if (timerInfo.status === 'concern') {
+                        statusText = `🚨 May exceed reasonable time (${timerInfo.suggestedTime} min limit)`;
+                    }
+                    
+                    if (stopReasons.length > 1) {
+                        statusText += ' - Weighted calculation';
+                    }
+                    
+                    timeStatus.textContent = statusText;
+                } else {
+                    timeStatus.textContent = '👁️ Time monitoring active - Select stop reasons for time limits';
+                }
+            }
+
+            console.log('Timer updated:', timerInfo);
+        }
+
+        function showOfficerCommandScreen() {
+            currentStep = 'officer-command';
+            
+            const content = `
+                <h2 style="text-align: center; margin-bottom: 20px;">What did the officer say?</h2>
+                
+                ${threatLevel !== 'normal' ? `
+                    <div style="padding: 12px; border-radius: 8px; border: 2px solid ${
+                        threatLevel === 'dangerous' ? '#dc2626' : 
+                        threatLevel === 'threatening' ? '#ca8a04' : '#6b7280'
+                    }; background: ${
+                        threatLevel === 'dangerous' ? '#7f1d1d' : 
+                        threatLevel === 'threatening' ? '#92400e' : '#374151'
+                    }; margin-bottom: 16px; text-align: center;">
+                        ${threatLevel === 'dangerous' && '<span style="color: #fca5a5;">🚨 DANGEROUS THREAT DETECTED</span>'}
+                        ${threatLevel === 'threatening' && '<span style="color: #fcd34d;">⚠️ THREATENING LANGUAGE DETECTED</span>'}
+                        ${threatLevel === 'unprofessional' && '<span style="color: #d1d5db;">📝 UNPROFESSIONAL CONDUCT NOTED</span>'}
+                    </div>
+                ` : ''}
+                
+                <button class="command-option" onclick="showResponse('license')">
+                    <div style="font-weight: bold;">Show me your license and registration</div>
+                    <div style="font-size: 12px; color: #9ca3af; margin-top: 4px;">✅ This request is lawful - comply immediately</div>
+                </button>
+                
+                <button class="command-option" onclick="showResponse('search')">
+                    <div style="font-weight: bold;">Can I search your car?</div>
+                    <div style="font-size: 12px; color: #9ca3af; margin-top: 4px;">⚠️ Respectfully educate, then comply if ordered</div>
+                </button>
+                
+                <button class="command-option" onclick="showResponse('stepout')">
+                    <div style="font-weight: bold;">Step out of the vehicle</div>
+                    <div style="font-size: 12px; color: #9ca3af; margin-top: 4px;">✅ This order is lawful - comply for safety</div>
+                </button>
+                
+                <button class="command-option" onclick="showResponse('camera')">
+                    <div style="font-weight: bold;">Turn off that camera/phone</div>
+                    <div style="font-size: 12px; color: #9ca3af; margin-top: 4px;">⚠️ You have the right to record - respectfully educate</div>
+                </button>
+
+                <button class="command-option" onclick="showResponse('threatening')" style="background: #7f1d1d; border-color: #dc2626;">
+                    <div style="font-weight: bold;">Threatening or aggressive statement</div>
+                    <div style="font-size: 12px; color: #fca5a5; margin-top: 4px;">🚨 DOCUMENT THREAT - Consider emergency activation</div>
+                </button>
+
+                <button class="command-option" onclick="showManualEntry()" style="background: #581c87; border-color: #7c3aed;">
+                    <div style="font-weight: bold;">🎤 Custom Command / Statement</div>
+                    <div style="font-size: 12px; color: #c4b5fd; margin-top: 4px;">Enter exactly what the officer said - threat detection will analyze</div>
+                </button>
+
+                <button class="btn btn-danger" onclick="showSummaryScreen()">
+                    🏁 END ENCOUNTER
+                </button>
+            `;
+
+            document.getElementById('mainContent').innerHTML = content;
+        }
+
+        function showManualEntry() {
+            const content = `
+                <h2 style="text-align: center; margin-bottom: 20px;">Manual Command Entry</h2>
+                <p style="text-align: center; color: #9ca3af; font-size: 14px; margin-bottom: 20px;">Enter exactly what the officer said - threat detection will analyze automatically</p>
+                
+                <textarea id="manualCommandInput" placeholder="Enter exactly what the officer said..." 
+                    style="width: 100%; padding: 12px; border: 1px solid #4b5563; border-radius: 8px; background: #374151; color: white; font-size: 16px; resize: none; min-height: 80px; margin-bottom: 16px;"></textarea>
+                
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-success" onclick="analyzeManualCommand()" style="flex: 1;">
+                        Analyze & Document
+                    </button>
+                    <button class="btn btn-danger" onclick="showOfficerCommandScreen()" style="flex: 1; margin-top: 0;">
+                        Cancel
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('mainContent').innerHTML = content;
+            
+            // Focus on the textarea
+            setTimeout(() => {
+                document.getElementById('manualCommandInput').focus();
+            }, 100);
+        }
+
+        function analyzeManualCommand() {
+            const input = document.getElementById('manualCommandInput').value.trim();
+            if (!input) {
+                alert('Please enter what the officer said');
+                return;
+            }
+
+            const detectedLevel = detectThreatLevel(input);
+            threatLevel = detectedLevel;
+
+            // Add to timeline
+            addTimelineEntry(
+                input,
+                `Manual entry - ${detectedLevel} level detected`,
+                detectedLevel,
+                detectedLevel !== 'normal' ? `${detectedLevel.toUpperCase()} language documented for legal review` : null
+            );
+
+            if (detectedLevel === 'dangerous') {
+                alert('⚠️ DANGEROUS THREAT DETECTED\n\nSerious threat language detected. This has been documented.\n\nConsider activating emergency mode immediately if you feel unsafe.');
+                showResponse('threatening');
+            } else if (detectedLevel === 'threatening') {
+                alert('⚠️ THREAT DETECTED\n\nOfficer used threatening language. This has been documented.\n\nConsider activating emergency mode if situation escalates further.');
+                showResponse('threatening');
+            } else if (detectedLevel === 'unprofessional') {
+                showResponse('unprofessional');
+            } else {
+                // Normal command, show generic response
+                showCustomResponse(input);
+            }
+
+            interactions++;
+            updateStatus();
+        }
+
+        function showCustomResponse(command) {
+            const content = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 32px; margin-bottom: 12px;">📝</div>
+                    <h2>Command Documented</h2>
+                </div>
+
+                <div class="response-box">
+                    <h3 style="font-weight: bold; margin-bottom: 12px; color: white;">📋 Officer Statement:</h3>
+                    <div class="response-script">
+                        "${command}"
+                    </div>
+                </div>
+
+                <div class="response-box">
+                    <h3 style="font-weight: bold; margin-bottom: 12px; color: white;">🗣️ General Response Guidance:</h3>
+                    <div class="response-script">
+                        "Officer, I want to cooperate fully with this traffic stop. I am recording this interaction for both our protection. I will comply with all lawful orders."
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-success" onclick="showOfficerCommandScreen()" style="flex: 1;">
+                        Next Command
+                    </button>
+                    <button class="btn btn-danger" onclick="showSummaryScreen()" style="flex: 1; margin-top: 0;">
+                        End Encounter
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('mainContent').innerHTML = content;
+        }
+
+        function showResponse(command) {
+            interactions++;
+            
+            const responses = {
+                'license': {
+                    icon: '✅',
+                    title: 'This request is lawful - comply immediately',
+                    script: 'Hand over documents calmly: "Here are my license and registration, officer."',
+                    details: 'Vehicle Code requires drivers to present license and registration during any lawful traffic stop.',
+                    courtChallenge: null
+                },
+                'search': {
+                    icon: '⚠️',
+                    title: 'Respectfully educate, then comply if ordered',
+                    script: 'Say respectfully: "Officer, I do not consent to this search. Under the 4th Amendment, you need probable cause or a warrant. Are you ordering me to allow the search?"',
+                    details: '4th Amendment requires warrant, probable cause, or consent for vehicle searches.',
+                    courtChallenge: 'Potential 4th Amendment violation if search conducted without probable cause or warrant'
+                },
+                'stepout': {
+                    icon: '✅',
+                    title: 'This order is lawful - comply for safety',
+                    script: 'Exit slowly with hands visible: "I am complying with your order, officer."',
+                    details: 'Pennsylvania v. Mimms (1977): Police can order driver out during traffic stops for officer safety.',
+                    courtChallenge: null
+                },
+                'camera': {
+                    icon: '⚠️',
+                    title: 'You have the right to record - respectfully educate',
+                    script: 'Say calmly: "Officer, I respect your authority, but I have a 1st Amendment right to record our interaction as established in Glik v. Cunniffe. I\'m not interfering with your duties."',
+                    details: '1st Amendment protects right to record police in public. Glik v. Cunniffe (2011) established this clearly.',
+                    courtChallenge: '1st Amendment violation if recording prohibited or device seized'
+                },
+                'threatening': {
+                    icon: '🚨',
+                    title: 'DOCUMENT THREAT - Consider emergency activation',
+                    script: 'Say calmly: "Officer, I want to cooperate fully. I am recording this interaction for both our protection. I am not resisting and am complying with lawful orders."',
+                    details: 'Threats of violence or property damage may constitute excessive force under Graham v. Connor.',
+                    courtChallenge: 'Excessive force threat - Graham v. Connor violation, potential criminal intimidation'
+                },
+                'unprofessional': {
+                    icon: '📝',
+                    title: 'Document unprofessional conduct',
+                    script: 'Remain calm and professional: "Officer, I understand you\'re doing your job. I want to cooperate fully with this traffic stop."',
+                    details: 'While not illegal, unprofessional conduct should be documented for potential complaints.',
+                    courtChallenge: 'Unprofessional conduct documented for administrative complaint'
+                }
+            };
+
+            const response = responses[command];
+            addTimelineEntry(response.title, response.script, command, response.courtChallenge);
+            
+            const content = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 32px; margin-bottom: 12px;">${response.icon}</div>
+                    <h2>${response.title}</h2>
+                </div>
+
+                <div class="response-box">
+                    <h3 style="font-weight: bold; margin-bottom: 12px; color: white;">🗣️ Suggested Response:</h3>
+                    <div class="response-script">
+                        "${response.script}"
+                    </div>
+                </div>
+
+                ${response.details ? `
+                    <div class="response-box">
+                        <h3 style="font-weight: bold; margin-bottom: 12px; color: white;">📚 Legal Basis:</h3>
+                        <div style="color: #d1d5db; font-size: 14px;">
+                            ${response.details}
+                        </div>
+                    </div>
+                ` : ''}
+
+                ${response.courtChallenge ? `
+                    <div style="background: #581c87; border: 2px solid #7c3aed; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                        <h4 style="font-weight: bold; color: #c4b5fd; margin-bottom: 8px;">⚖️ Potential Court Challenge:</h4>
+                        <p style="color: #ddd6fe; font-size: 14px;">${response.courtChallenge}</p>
+                    </div>
+                ` : ''}
+
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-success" onclick="showOfficerCommandScreen()" style="flex: 1;">
+                        Next Command
+                    </button>
+                    <button class="btn btn-danger" onclick="showSummaryScreen()" style="flex: 1; margin-top: 0;">
+                        End Encounter
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('mainContent').innerHTML = content;
+            updateStatus();
+        }
+
+        function showSummaryScreen() {
+            const timerInfo = getTimerInfo();
+            const duration = encounterStartTime ? 
+                Math.round((new Date() - encounterStartTime) / 1000 / 60) : 0;
+                
+            const courtChallenges = timeline.filter(entry => entry.courtChallenge).map(entry => entry.courtChallenge);
+            const threats = timeline.filter(entry => entry.lawfulStatus === 'threatening' || entry.lawfulStatus === 'dangerous');
+
+            const content = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 32px; margin-bottom: 12px;">✅</div>
+                    <h2>Encounter Complete</h2>
+                    <p style="color: #9ca3af; font-size: 14px;">All evidence documented and saved</p>
+                </div>
+
+                <div class="response-box">
+                    <h3 style="font-weight: bold; margin-bottom: 12px; color: white;">📊 Encounter Summary</h3>
+                    <div style="font-size: 14px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #9ca3af;">State:</span>
+                            <span style="color: white;">${stateNames[selectedState] || 'Not selected'}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #9ca3af;">Duration:</span>
+                            <span style="color: white;">${duration} minutes</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #9ca3af;">Interactions:</span>
+                            <span style="color: white;">${timeline.length}</span>
+                        </div>
+                        ${stopReasons.length > 0 ? `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="color: #9ca3af;">Stop Reasons:</span>
+                                <span style="color: white;">${stopReasons.length}</span>
+                            </div>
+                        ` : ''}
+                        ${timerInfo && timerInfo.suggestedTime ? `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="color: #9ca3af;">Time Status:</span>
+                                <span style="color: ${timerInfo.color === 'green' ? '#22c55e' : timerInfo.color === 'yellow' ? '#eab308' : '#ef4444'};">
+                                    ${timerInfo.status === 'reasonable' ? '✓ Within reasonable time' :
+                                      timerInfo.status === 'caution' ? '⚠️ Approaching limit' : '🚨 May exceed reasonable time'}
+                                </span>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+
+                ${timeline.length > 0 ? `
+                    <div class="response-box">
+                        <h3 style="font-weight: bold; margin-bottom: 12px; color: white;">📋 Timeline</h3>
+                        <div style="max-height: 200px; overflow-y: auto;">
+                            ${timeline.map(entry => `
+                                <div style="padding: 8px; border-bottom: 1px solid #4b5563; font-size: 12px;">
+                                    <div style="color: #60a5fa; font-weight: bold;">${entry.timestamp}</div>
+                                    <div style="color: white; margin: 4px 0;">${entry.command}</div>
+                                    <div style="color: #9ca3af;">${entry.assessment}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
+                ${threats.length > 0 ? `
+                    <div style="background: #7f1d1d; border: 2px solid #dc2626; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                        <h4 style="font-weight: bold; color: #fca5a5; margin-bottom: 8px;">🚨 Threats Detected: ${threats.length}</h4>
+                        <div style="font-size: 12px; color: #fecaca;">
+                            ${threats.map(threat => `<div style="margin-bottom: 4px;">• ${threat.command}</div>`).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
+                ${courtChallenges.length > 0 ? `
+                    <div style="background: #581c87; border: 2px solid #7c3aed; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                        <h4 style="font-weight: bold; color: #c4b5fd; margin-bottom: 8px;">⚖️ Potential Legal Challenges: ${courtChallenges.length}</h4>
+                        <div style="font-size: 12px; color: #ddd6fe;">
+                            ${courtChallenges.map(challenge => `<div style="margin-bottom: 4px;">• ${challenge}</div>`).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-primary" onclick="shareEncounter()" style="flex: 1;">
+                        📤 Share Summary
+                    </button>
+                    <button class="btn btn-primary" onclick="startNewEncounter()" style="flex: 1; margin-top: 0;">
+                        🔄 New Encounter
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('mainContent').innerHTML = content;
+        }
+
+        async function shareEncounter() {
+            const timerInfo = getTimerInfo();
+            const duration = encounterStartTime ? 
+                Math.round((new Date() - encounterStartTime) / 1000 / 60) : 0;
+            
+            const shareText = `Rights Defender - Traffic Stop Summary
+📍 State: ${stateNames[selectedState] || 'Not selected'}
+⏱️ Duration: ${duration} minutes
+📊 Interactions: ${timeline.length}
+${stopReasons.length > 0 ? `🚦 Stop Reasons: ${stopReasons.length}\n` : ''}
+${timerInfo && timerInfo.suggestedTime ? `⏰ Time Status: ${timerInfo.status}\n` : ''}
+${timeline.filter(e => e.lawfulStatus === 'threatening' || e.lawfulStatus === 'dangerous').length > 0 ? `🚨 Threats Detected: ${timeline.filter(e => e.lawfulStatus === 'threatening' || e.lawfulStatus === 'dangerous').length}\n` : ''}
+📋 Timeline: ${timeline.length} documented interactions
+
+Generated by Rights Defender App`;
+
+            if (navigator.share && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                try {
+                    await navigator.share({
+                        title: 'Rights Defender - Traffic Stop Summary',
+                        text: shareText
+                    });
+                } catch (err) {
+                    console.log('Share cancelled');
+                }
+            } else {
+                if (navigator.clipboard) {
+                    await navigator.clipboard.writeText(shareText);
+                    alert('Summary copied to clipboard');
+                } else {
+                    alert('Summary:\n\n' + shareText);
+                }
+            }
+        }
+
+        function startNewEncounter() {
+            // Reset all state
+            isRecording = false;
+            isTransmitting = false;
+            selectedState = '';
+            interactions = 0;
+            currentStep = 'state-selection';
+            encounterStartTime = null;
+            stopReasons = [];
+            timeline = [];
+            threatLevel = 'normal';
+            
+            // Reset UI
+            document.getElementById('recordBtn').classList.remove('active');
+            document.getElementById('transmitBtn').classList.remove('active');
+            
+            // Show initial screen
+            const content = `
+                <h2 style="text-align: center; margin-bottom: 10px;">Select Your State</h2>
+                <p style="text-align: center; color: #9ca3af; font-size: 14px; margin-bottom: 20px;">Laws vary by state - accurate guidance requires your location</p>
+                
+                <select id="stateSelect">
+                    <option value="" disabled selected>Choose your state...</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                    <option value="DC">District of Columbia</option>
+                </select>
+
+                <div class="selected-state hidden" id="selectedState">
+                    ✓ Selected: <span id="stateName"></span>
+                </div>
+
+                <button class="btn btn-primary hidden" id="startBtn">
+                    🚔 POLICE ENCOUNTER STARTING NOW
+                </button>
+            `;
+
+            document.getElementById('mainContent').innerHTML = content;
+            
+            // Re-attach event listeners
+            document.getElementById('stateSelect').addEventListener('change', (e) => {
+                selectedState = e.target.value;
+                if (selectedState) {
+                    document.getElementById('selectedState').classList.remove('hidden');
+                    document.getElementById('startBtn').classList.remove('hidden');
+                    document.getElementById('stateName').textContent = stateNames[selectedState];
+                    updateStatus();
+                }
+            });
+
+            document.getElementById('startBtn').addEventListener('click', () => {
+                showTrafficStopScreen();
+            });
+
+            updateStatus();
+        }
+
+        function updateStatus() {
+            const statusBar = document.getElementById('statusBar');
+            let leftStatus = '📍 Ready to start';
+            let rightStatus = '⚖️ Legal protection active';
+
+            if (selectedState) {
+                leftStatus = `📍 ${stateNames[selectedState]} law active`;
+            }
+            
+            if (interactions > 0) {
+                rightStatus = `📊 ${interactions} interactions logged`;
+            }
+            
+            if (isRecording) {
+                leftStatus = '🔴 Recording active';
+            }
+            
+            if (isTransmitting) {
+                rightStatus = '📡 Live transmission active';
+            }
+
+            statusBar.innerHTML = `<span>${leftStatus}</span><span>${rightStatus}</span>`;
+        }
+
+        // Check if app is running as PWA
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+            document.getElementById('appBadge').classList.remove('hidden');
+        }
+
+        // Initial status
+        updateStatus();
+
+        console.log('Rights Defender loaded - Simple version');
+    </script>
+</body>
 </html>
